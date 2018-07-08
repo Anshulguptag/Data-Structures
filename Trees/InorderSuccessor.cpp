@@ -17,91 +17,33 @@ Node* newNode(int data)
     return node;
 }
 
-Node* mini(Node* root)
+void inordersucc(Node* root, Node*& suc, int x)
 {
-    while(root->left!=NULL)
-        root = root->left;
-    return root;
-}
-
-Node* maxi(Node* root)
-{
-    while(root->right!=NULL)
-        root = root->right;
-    return root;
-}
-
-Node* righttree(Node* temp, Node* temp1, int data)
-{
-    while(temp1->data!=data)
+    if(root==NULL)
+        return;
+    if(root->data == x)
     {
-        if(temp1->data<data)
+        if(root->right!=NULL)
         {
-            temp = temp1;
-            temp1 = temp1->right;
+            Node* temp = root->right;
+            while(temp->left!=NULL)
+                temp = temp->left;
+            suc = temp;
         }
-        else if(temp1->data>data)
-        {
-            temp = temp1;
-            temp1 = temp1->left;
-        }
+        return ;
     }
-    if(temp->data>temp1->data)
+    if(root->data > x)
     {
-       if(temp1->left!=NULL)
-       {
-           return maxi(temp1->left);
-       }
-       else
-        return temp;
+        suc = root;
+        inordersucc(root->left, suc, x);
     }
     else
     {
-      if(temp1->right!=NULL)
-        {
-            return mini(temp1->right);
-        }
-        else
-            return temp1;
+        inordersucc(root->right, suc, x);
     }
 }
 
-Node* lefttree(Node* root,Node* temp, Node* temp1, int data)
-{
-    while(temp1->data!=data)
-    {
-        if(temp1->data<data)
-        {
-            temp = temp1;
-            temp1 = temp1->right;
-        }
-        else if(temp1->data>data)
-        {
-            temp = temp1;
-            temp1 = temp1->left;
-        }
-    }
-    if(temp1->right!=NULL)
-       {
-           return mini(temp1->right);
-       }
-    else if(temp1->data>temp->data)
-        return root;
-    else
-        return temp;
-}
 
-Node* inordersucc(Node* root, int data)
-{
-    if(root==NULL) return root;
-    Node* temp = root;
-    if(root->data<data)
-       return righttree(temp, root->right, data);
-    else
-        return lefttree(root, temp, root->left, data);
-
-
-}
 int main()
 {
     Node* root = newNode(20);
@@ -114,8 +56,48 @@ int main()
     root->left->right = newNode(12);
     root->left->right->left = newNode(10);
     root->left->right->right = newNode(14);
+    Node* succ = NULL;
+    inordersucc(root,succ, 10);
+    if(succ!=NULL)
+    {
+      cout<<"Inorder Successor of 10 is "<<succ->data;
+      succ = NULL;
+    }
+    else
+    {
+        cout<<"No Successor ";
+    }
+    inordersucc(root,succ, 14);
+    if(succ!=NULL)
+    {
+       cout<<"\nInorder Successor of 14 is "<<succ->data;
+       succ = NULL;
+    }
+    else
+    {
+        cout<<"No Successor ";
+    }
+    inordersucc(root,succ, 8);
+    if(succ!=NULL)
+    {
+        cout<<"\nInorder Successor of 8 is "<<succ->data;
+        succ = NULL;
+    }
+    else
+    {
+        cout<<"No Successor ";
+    }
+    cout<<"\n";
+    inordersucc(root,succ, 24);
+    if(succ!=NULL)
+    {
+        cout<<"Inorder Successor of 24 is "<<succ->data;
+        succ = NULL;
+    }
+    else
+    {
+        cout<<"No Successor ";
+    }
 
-    cout<<"Inorder Successor of 10 is "<<inordersucc(root, 10)->data;
-    cout<<"\nInorder Successor of 14 is "<<inordersucc(root, 14)->data;
-    cout<<"\nInorder Successor of 8 is "<<inordersucc(root, 8)->data;
+
 }

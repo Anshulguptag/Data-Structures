@@ -43,7 +43,7 @@ void findPreSuc(Node* root, Node*& pre, Node*& suc, int x)
     {
         if(root->left!=NULL)
         {
-            Node* temp = root->left;
+            Node* temp = root->right;
             while(temp->right!=NULL)
                 temp = temp->right;
             pre = temp;
@@ -82,7 +82,7 @@ int main()
     inorder(root);
     Node* pre = NULL;
     Node* suc = NULL;
-    findPreSuc(root, pre, suc, 12);
+    findPreSuc(root, pre, suc, 17);
     cout<<"\n";
     if(pre!=NULL)
         cout<<"Predecessor is "<<pre->key<<endl;
