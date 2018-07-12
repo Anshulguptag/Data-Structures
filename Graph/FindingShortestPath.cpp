@@ -36,7 +36,7 @@ void findPath(int x,int y,char ch[])
        count = 0;
        for (int j = 0; j < 8; j++)
             visited[j] = false;
-
+       visited[x]=true;
        findShortPath(*i,y,ch,&count,visited);
        if(k>count)
        {
@@ -70,7 +70,7 @@ void addEdge(char a,char b,char ch[],int size)
     }
 
     adj[i].push_front(j);
-    adj[j].push_front(i);
+    adj[j].push_back(i);
 }
 
 int findIndex(char a,char ch[],int size)
@@ -87,15 +87,15 @@ int main()
 {
     char ch[] = {'A','B','C','D','E','F','G','H'};
     int size = *(&ch+1)-ch;
+    addEdge('A','B',ch,size);
     addEdge('A','C',ch,size);
     addEdge('A','F',ch,size);
-    addEdge('A','B',ch,size);
     addEdge('B','D',ch,size);
     addEdge('C','E',ch,size);
     addEdge('D','E',ch,size);
     addEdge('F','G',ch,size);
-    addEdge('G','H',ch,size);
     addEdge('G','E',ch,size);
+    addEdge('G','H',ch,size);
     addEdge('H','E',ch,size);
 
     list<int>::iterator i;
