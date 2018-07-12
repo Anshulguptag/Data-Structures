@@ -1,5 +1,6 @@
 #include<iostream>
 #include<vector>
+#include<queue>
 using namespace std;
 
 struct NodeList
@@ -35,16 +36,21 @@ NodeList* Insert(NodeList* head, int x)
     }
     return head;
 }
-void DFS(vector<Node*> v,int i,bool visited[], char ch[])
+queue<char> path;
+void DFS(vector<Node*> v,int i,bool visited[], char ch[], char target)
 {
     visited[i] = true;
+    path.push(ch[i]);
+    if(ch[i]==target)
+        return;
     NodeList* temp = v[i]->edge;
     while(temp!=NULL)
        {
             if(!visited[temp->data])
                 {
+                    return DFS(v,temp->data,visited,ch,target);
                     cout<<ch[temp->data]<<" ";
-                    DFS(v,temp->data,visited,ch);
+
                 }
             temp = temp->next;
        }
@@ -114,15 +120,20 @@ int main()
         v.push_back(InsertGraph(start,i,ch,size));
 
     }
+    cout<<"\nEnter the destination path: ";
+    char target;
+    cin>>target;
     bool visited[size];
     for(int i=0;i<size;i++)
     {
         visited[i]=false;
     }
-    cout<<"DFS Traversal: "<<ch[0]<<" ";
-    for(int i=0;i<v.size();i++)
+    cout<<"Path from A-E: ";
+    DFS(v,0,visited,ch,'E');
+    while(!path.empty())
     {
-        if(!visited[i])
-           DFS(v,i,visited,ch);
+        cout<<path.front()<<"->";
+        path.pop();
     }
+    cout<<"Terminate";
 }

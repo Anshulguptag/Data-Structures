@@ -41,11 +41,17 @@ void DFS(vector<Node*> v,int i,bool visited[], char ch[])
     NodeList* temp = v[i]->edge;
     while(temp!=NULL)
        {
-            if(!visited[temp->data])
+           if(visited[temp->data])
+            {
+                cout<<"Loop is found at "<<ch[temp->data];
+                return ;
+            }
+            else
                 {
                     cout<<ch[temp->data]<<" ";
-                    DFS(v,temp->data,visited,ch);
+                    return DFS(v,temp->data,visited,ch);
                 }
+
             temp = temp->next;
        }
 
@@ -60,6 +66,8 @@ void Print(NodeList* head,char ch[])
     cout<<"NULL";
     cout<<"\n";
 }
+
+
 int getIndex(char ch[], char edge, int size)
 {
     int j;
@@ -120,9 +128,7 @@ int main()
         visited[i]=false;
     }
     cout<<"DFS Traversal: "<<ch[0]<<" ";
-    for(int i=0;i<v.size();i++)
-    {
-        if(!visited[i])
-           DFS(v,i,visited,ch);
-    }
+
+    DFS(v,0,visited,ch);
 }
+
