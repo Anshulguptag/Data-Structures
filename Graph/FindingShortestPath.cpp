@@ -68,9 +68,8 @@ void addEdge(char a,char b,char ch[],int size)
         if(ch[j]==b)
             break;
     }
-
     adj[i].push_front(j);
-    adj[j].push_back(i);
+    adj[j].push_front(i);
 }
 
 int findIndex(char a,char ch[],int size)
@@ -94,7 +93,6 @@ int main()
     addEdge('C','E',ch,size);
     addEdge('D','E',ch,size);
     addEdge('F','G',ch,size);
-    addEdge('G','E',ch,size);
     addEdge('G','H',ch,size);
     addEdge('H','E',ch,size);
 
