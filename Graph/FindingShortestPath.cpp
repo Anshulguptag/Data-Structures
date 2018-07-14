@@ -1,3 +1,5 @@
+/*DFS is used*/
+
 #include<iostream>
 #include<list>
 #include<queue>
@@ -7,7 +9,6 @@ using namespace std;
 queue<int> temppath;
 queue<int> path;
 list<int> *adj = new list<int>[8];
-int count;
 
 void findShortPath(int x,int y,char ch[],int *count,bool visited[])
 {
