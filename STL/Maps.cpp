@@ -14,7 +14,6 @@ int main()
 
         m.insert(x);
     }
-
     map<char, int>::iterator itr=m.begin();
 
     for(itr=m.begin();itr!=m.end();itr++)

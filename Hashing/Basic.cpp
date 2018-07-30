@@ -28,7 +28,10 @@ int main()
     {
         Insert(arr[i],size);
     }
-
+    if(*adj[0].begin()!=NULL)
+    {
+        cout<<"yes";
+    }
     list<int>::iterator k;
     for(int j=0;j<size;j++)
     {
